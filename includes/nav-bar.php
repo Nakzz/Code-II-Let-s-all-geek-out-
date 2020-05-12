@@ -1,6 +1,3 @@
-
-
-<!--nav-bar-->
 <div class="header header-hide">
 			<div class="container">
 				<nav class="navbar navbar-default" role="navigation">
@@ -17,7 +14,6 @@
                       <li><a href="./index.php">Home</a></li>
 
                         <li><a href="./entry.php">Add an entry</a></li>
-
 
 					  </ul>
 				   </div>
