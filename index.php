@@ -15,16 +15,13 @@
         // include('./includes/ChromePhp.php');
         // ChromePhp::log('hello world');
 
-        $query = "SELECT * FROM FACULTY WHERE fac_id=\"testAdmin\"";
+        $query = "SELECT * FROM ITEMS";
         $result = mysqli_query($conn, $query);
         if (!$result){
             die("cannot processed select query");
         }
-        $row = mysqli_fetch_assoc($result);
+        // $row = mysqli_fetch_assoc($result);
 
-
-
-        //
         include_once("./includes/head.php");
 
         ?>      
@@ -81,8 +78,8 @@
 			<div class="container">
 				<div class="row">
 				  <div class="col-lg-8 wow animated fadeInUp align-center" data-wow-duration="1s" data-wow-delay="1s">
-					<h1 class="arrow">What You Bring to the Table</h1><hr>
-					<p>At Mendota University, being yourself is powerful. We value unique individuals who strive to be the best they can be. And we accept individuals of all backgrounds. Our students have the capabilities to learn, teach, and empower others through our school's rigourous academic programs. We rank #1 in academics and diversity, according to US News & Reports.</p>
+					<h1 class="arrow">Here's who we are geeked about!</h1><hr>
+					
 				  </div>
 				</div>
 				<div class="row">
@@ -90,50 +87,70 @@
 						<div id="portfolioSlider">
 							<ul class="slides">
 								<li>
-									<div class="col-md-4 col-sm-4 wow animated fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">
-										<div class="overlay-effect effects clearfix">
-											<div class="img">
-											  <img src="assets/img/team/team1.jpg" alt="Portfolio Item">
-											  <div class="overlay">
-												<button class="md-trigger expand" data-modal="modal-1"><i class="fa fa-search"></i><br>View More</button>
-											  </div>
-											</div>
-										</div>
-										<h2>Parents</h2>
-										<p>Parents and families are highly valued members of the MendotaU community. </p>
-									</div>
 
-									<div class="col-md-4 col-sm-4 wow animated fadeInUp" data-wow-duration="1s" data-wow-delay="0.7s">
-										<div class="overlay-effect effects clearfix">
-											<div class="img">
-												<img src="assets/img/team/team2.jpg" alt="Portfolio Item">
-												<div class="overlay">
-													<button class="md-trigger expand" data-modal="modal-2"><i class="fa fa-search"></i><br>View More</button>
-												</div>
-											</div>
-										</div>
-										<h2>Research</h2>
-										<p>1,578 research funding awards</p>
-									</div>
+<?php
 
-									<div class="col-md-4 col-sm-4 wow animated fadeInUp" data-wow-duration="1s" data-wow-delay="0.9s">
-										<div class="overlay-effect effects clearfix">
-											<div class="img">
-												<img src="assets/img/team/team3.jpg" alt="Portfolio Item">
-												<div class="overlay">
-													<button class="md-trigger expand" data-modal="modal-3"><i class="fa fa-search"></i><br>View More</button>
-												</div>
-											</div>
-										</div>
-										<h2>Awards</h2>
-										<p>27 faculty and staff Nobel Prize winners</p>
-									</div>
+
+foreach($result as $row){
+	
+				
+	echo('<div class="col-md-4 col-sm-4 wow animated fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s"> ');
+	echo('<div class="overlay-effect effects clearfix">');
+	echo('<div class="img">');
+	echo('<img src="'. $row["img"].'" alt="Image">');
+	echo('<div class="overlay">');
+	echo('<button class="md-trigger expand" data-modal="modal-'. $row["item_code"].'"><i class="fa fa-search"></i><br>View More</button>');
+	echo('</div></div></div>');
+	echo ('<h2>'. $row["name"].'</h2>');
+	echo('</div>');
+		
+	}
+	
+	?>
+
+
 								</li>
 							</ul>
 						</div>
 					</div>
 				</div> <!--Row Ends Here-->
 			</div>
+
+
+
+			<?php
+
+
+foreach($result as $row){
+	
+				
+	echo('<div class="md-modal md-effect-9" id="modal-'. $row["item_code"].'">
+	<div class="md-content">
+		<div class="folio">
+			
+		<div class="imgSm">
+				<img src="'. $row["img"].'" alt="Image"> </div>
+			<div class="sp-name"><strong>'. $row["name"].'</strong><br/></div>
+			<div class="sp-dsc">
+			'. $row["bio"].' </br> Fun fact: '. $row["fun"].'
+			</div>
+			<div class="sp-social">
+				<ul>
+					<li><a href="'. $row["other"].'" class="social-btn"><i class="fa fa-link"></i></a></li>
+				</ul>
+			</div>
+			<button class="md-close"><i class="fa fa-times"></i></button>
+		</div>
+	</div>
+</div> 
+<div class="md-overlay"></div>');
+
+		
+	}
+	
+	?>
+
+
 			<!-- Example Speaker -->
 			<div class="md-modal md-effect-9" id="modal-1">
 				<div class="md-content">
